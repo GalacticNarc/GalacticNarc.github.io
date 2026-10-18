@@ -7,6 +7,7 @@
 <meta name="description" content="Portfolio of Chester John R. Gomba, AI automation developer and web developer.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@500&display=swap">
 <style>
   /* Layout: asymmetric hero with portrait, then a single reading column of sections set off by mono labels and a teal "vital line" rule. */
@@ -109,7 +110,11 @@
   .skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
   .skills h3{font:600 13px var(--font-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
   .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{padding:7px 12px;border-radius:9px;border:1px solid var(--line);background:var(--surface-2);font-size:14px;font-weight:500}
+  .chip{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:9px;border:1px solid var(--line);background:var(--surface-2);font-size:14px;font-weight:500;transition:border-color .2s,transform .2s}
+  .chip i{font-size:17px;color:var(--accent);line-height:1}
+  .chip:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .skills h3{display:flex;align-items:center;gap:8px}
+  .skills h3 i{font-size:16px;color:var(--accent)}
 
   /* Education */
   .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
@@ -349,9 +354,9 @@
       <p class="label">Skills</p>
       <h2>What I work with</h2>
       <div class="skills fx fx-flip">
-        <div class="panel"><h3>Languages</h3><div class="chips"><span class="chip">Python</span><span class="chip">PHP</span><span class="chip">HTML</span><span class="chip">CSS</span></div></div>
-        <div class="panel"><h3>Tools</h3><div class="chips"><span class="chip">Visual Studio</span><span class="chip">Figma</span><span class="chip">Playwright</span><span class="chip">Google Workspace</span><span class="chip">Excel</span></div></div>
-        <div class="panel"><h3>Strengths</h3><div class="chips"><span class="chip">Troubleshooting</span><span class="chip">End-user support</span><span class="chip">Workflow automation</span><span class="chip">Attention to detail</span><span class="chip">UI design</span><span class="chip">Working under pressure</span></div></div>
+        <div class="panel"><h3><i class="ti ti-code" aria-hidden="true"></i>Languages</h3><div class="chips"><span class="chip"><i class="ti ti-brand-python" aria-hidden="true"></i>Python</span><span class="chip"><i class="ti ti-brand-php" aria-hidden="true"></i>PHP</span><span class="chip"><i class="ti ti-brand-html5" aria-hidden="true"></i>HTML</span><span class="chip"><i class="ti ti-brand-css3" aria-hidden="true"></i>CSS</span></div></div>
+        <div class="panel"><h3><i class="ti ti-tools" aria-hidden="true"></i>Tools</h3><div class="chips"><span class="chip"><i class="ti ti-brand-visual-studio" aria-hidden="true"></i>Visual Studio</span><span class="chip"><i class="ti ti-brand-figma" aria-hidden="true"></i>Figma</span><span class="chip"><i class="ti ti-masks-theater" aria-hidden="true"></i>Playwright</span><span class="chip"><i class="ti ti-brand-google" aria-hidden="true"></i>Google Workspace</span><span class="chip"><i class="ti ti-file-spreadsheet" aria-hidden="true"></i>Excel</span></div></div>
+        <div class="panel"><h3><i class="ti ti-star" aria-hidden="true"></i>Strengths</h3><div class="chips"><span class="chip"><i class="ti ti-tool" aria-hidden="true"></i>Troubleshooting</span><span class="chip"><i class="ti ti-headset" aria-hidden="true"></i>End-user support</span><span class="chip"><i class="ti ti-bolt" aria-hidden="true"></i>Workflow automation</span><span class="chip"><i class="ti ti-zoom-check" aria-hidden="true"></i>Attention to detail</span><span class="chip"><i class="ti ti-palette" aria-hidden="true"></i>UI design</span><span class="chip"><i class="ti ti-clock-bolt" aria-hidden="true"></i>Working under pressure</span></div></div>
       </div>
     </div>
   </section>
