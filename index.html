@@ -66,8 +66,7 @@
   .meta{display:flex;gap:8px 22px;flex-wrap:wrap;margin-top:24px;color:var(--muted);font-size:14px}
   .meta b{color:var(--fg);font-weight:600}
   .portrait{position:relative;justify-self:center;width:min(360px,100%);isolation:isolate}
-  .portrait::before{content:"";position:absolute;inset:12% 2% 0;z-index:-1;border-radius:50%;background:radial-gradient(closest-side,var(--accent-soft),transparent);filter:blur(10px)}
-  .portrait img{width:100%;max-width:100%;aspect-ratio:372/448;object-fit:contain;display:block;-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent)}
+  .portrait img{width:100%;max-width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;display:block;-webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 48%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 48%,#000 62%,transparent 100%)}
   .portrait figcaption{position:absolute;left:-14px;bottom:24px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:12px;padding:9px 13px;font:500 12.5px var(--font-mono);color:var(--fg)}
 
   /* Sections */
@@ -230,7 +229,7 @@
         <div class="meta"><span>Based in <b>Mabini, Pangasinan</b></span><span>Degree <b>BS Information Technology, 2026</b></span></div>
       </div>
       <figure class="portrait rise" style="margin:0">
-        <img src="images/portrait.webp" alt="Portrait of Chester John Gomba">
+        <img src="images/portrait-grad.webp" alt="Portrait of Chester John Gomba">
         <figcaption>Python · PHP · HTML/CSS</figcaption>
       </figure>
     </div>
