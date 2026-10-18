@@ -130,6 +130,19 @@
   .line{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 8px 8px 14px}
   .line span{font:500 14px var(--font-mono);user-select:all}
   .copy{border:0;background:var(--accent);color:var(--on-accent);border-radius:8px;padding:7px 11px;font:600 12.5px var(--font-body);cursor:pointer}
+  /* Screenshot gallery */
+  .shot{position:relative;display:block;width:100%;padding:0;margin:0 0 16px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface-2);cursor:zoom-in}
+  .shot img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:top left;transition:transform .4s ease}
+  .shot:hover img{transform:scale(1.04)}
+  .shot span{position:absolute;right:8px;bottom:8px;background:var(--accent);color:var(--on-accent);font:600 11.5px var(--font-body);padding:4px 9px;border-radius:999px}
+  dialog.gallery{border:0;padding:0;background:transparent;max-width:min(1100px,94vw);width:100%;color:#fff}
+  dialog.gallery::backdrop{background:rgba(5,10,12,.85)}
+  .gallery figure{margin:0}
+  .gallery img{display:block;width:100%;max-height:78vh;object-fit:contain;border-radius:12px;background:#fff}
+  .gallery figcaption{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;font-size:14px}
+  .gallery .nav-btns{display:flex;gap:8px}
+  .gallery button{border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:8px 14px;font:600 14px var(--font-body);cursor:pointer}
+  .gallery button:hover{background:rgba(255,255,255,.2)}
   footer{padding-block:28px 40px;color:var(--muted);font-size:13px;text-align:center}
 
   /* About boxes slide in from left and right */
@@ -279,10 +292,15 @@
           <a href="https://doi.org/10.51583/IJLTEMAS.2026.150500270" target="_blank" rel="noopener">Read the published paper ↗</a>
         </article>
         <article class="proj">
-          <div class="kind">Web system · PHP</div>
+          <button class="shot" type="button" data-gallery="clinica" aria-label="View Clinica screenshots">
+            <img src="images/clinica/dashboard.webp" alt="Clinica dashboard" loading="lazy" width="1400" height="668">
+            <span>9 screenshots</span>
+          </button>
+          <div class="kind">Web system · PHP (Laravel)</div>
           <h3>Clinica</h3>
-          <p>An appointment and inventory system for a doctor's clinic, handling patient bookings and supply tracking in one place. Currently in development for a client.</p>
+          <p>A clinic management system for a doctor's office: patient records, appointment booking with walk-ins and doctor schedules, medicine inventory with low-stock alerts, and staff accounts with roles. Currently in development for a client.</p>
           <div class="where">Client project · In progress</div>
+          <a href="#" data-gallery="clinica">View screenshots →</a>
         </article>
         <article class="proj">
           <div class="kind">Website · HTML &amp; CSS</div>
@@ -371,6 +389,20 @@
 
 <footer>© 2026 Chester John R. Gomba</footer>
 
+<dialog class="gallery" id="gallery" aria-label="Screenshots">
+  <figure>
+    <img id="galImg" alt="">
+    <figcaption>
+      <span id="galCap"></span>
+      <span class="nav-btns">
+        <button type="button" id="galPrev" aria-label="Previous screenshot">←</button>
+        <button type="button" id="galNext" aria-label="Next screenshot">→</button>
+        <button type="button" id="galClose">Close</button>
+      </span>
+    </figcaption>
+  </figure>
+</dialog>
+
 <script>
   document.documentElement.classList.add('js');
   const animated = document.querySelectorAll('.about, .fx');
@@ -383,7 +415,7 @@
     void el.offsetWidth;
     el.classList.add('show');
   };
-  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', () => {
+  document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(a => a.addEventListener('click', () => {
     const sec = document.querySelector(a.getAttribute('href'));
     if (sec) setTimeout(() => sec.querySelectorAll('.about, .fx').forEach(replay), 250);
   }));
@@ -404,4 +436,36 @@
     const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected'; setTimeout(() => b.textContent = 'Copy', 1500); };
     try { navigator.clipboard.writeText(el.textContent).then(done, fallback); } catch (e) { fallback(); }
   }));
+
+  const galleries = {
+    clinica: [
+      ['login', 'Staff login'],
+      ['dashboard', "Dashboard: patients, today's appointments, low-stock items"],
+      ['patients', 'Patient list with search'],
+      ['add-patient', 'Adding a patient record'],
+      ['appointments', 'Appointments by date and status, with walk-ins'],
+      ['add-appointment', 'Booking an appointment with available time slots'],
+      ['inventory', 'Medicine inventory with low-stock filter'],
+      ['add-medicine', 'Adding medicine with reorder level and expiry'],
+      ['staff', 'Staff accounts and roles']
+    ]
+  };
+  const dlg = document.getElementById('gallery'), galImg = document.getElementById('galImg'), galCap = document.getElementById('galCap');
+  let gal = [], gi = 0, galName = '';
+  const showShot = i => {
+    gi = (i + gal.length) % gal.length;
+    galImg.src = `images/${galName}/${gal[gi][0]}.webp`;
+    galImg.alt = gal[gi][1];
+    galCap.textContent = `${gi + 1} / ${gal.length} · ${gal[gi][1]}`;
+  };
+  document.querySelectorAll('[data-gallery]').forEach(el => el.addEventListener('click', e => {
+    e.preventDefault();
+    galName = el.dataset.gallery; gal = galleries[galName];
+    showShot(0); dlg.showModal();
+  }));
+  document.getElementById('galPrev').onclick = () => showShot(gi - 1);
+  document.getElementById('galNext').onclick = () => showShot(gi + 1);
+  document.getElementById('galClose').onclick = () => dlg.close();
+  dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+  dlg.addEventListener('keydown', e => { if (e.key === 'ArrowRight') showShot(gi + 1); if (e.key === 'ArrowLeft') showShot(gi - 1); });
 </script>
