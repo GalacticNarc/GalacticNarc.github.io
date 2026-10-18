@@ -1,3 +1,7 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Chester John Gomba</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Portfolio of Chester John R. Gomba, AI automation developer and web developer.">
@@ -27,7 +31,7 @@
     --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px rgba(0,0,0,.35); color-scheme:dark;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;scroll-padding-top:72px}
   body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
   a{color:inherit}
   h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0}
@@ -157,7 +161,11 @@
     .portrait{order:-1}
     .projects,.skills{grid-template-columns:repeat(2,minmax(0,1fr))}
     .job{grid-template-columns:minmax(0,1fr);gap:6px}
-    .nav ul{display:none}
+    html{scroll-padding-top:104px}
+    .nav .wrap{flex-wrap:wrap;height:auto;padding-block:10px 0;row-gap:6px}
+    .nav ul{order:3;width:100%;gap:20px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+    .nav ul::-webkit-scrollbar{display:none}
+    .nav ul a{white-space:nowrap}
   }
   @media (max-width:600px){
     .projects,.skills{grid-template-columns:minmax(0,1fr)}
